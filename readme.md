@@ -1,4 +1,4 @@
-# DevCamper API
+# DevCamper101 API
 
 > Backend API for DevCamper101 application, which is a bootcamp
 > directory website
