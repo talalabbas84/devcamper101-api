@@ -6,14 +6,11 @@ const advancedResults = (model, populate) => async(req, res, next) => {
     const removeFields = ['select', 'sort', 'page', 'limit'];
 
     //Loop over removeFields and delete them from reqQuery
-    removeFields.forEach((param) => delete reqQuery[param]);
+    removeFields.forEach(param => delete reqQuery[param]);
 
     let queryStr = JSON.stringify(reqQuery);
 
-    queryStr = queryStr.replace(
-        /\b(gt|gte|lt|lte|in)\b/g,
-        (match) => `$${match}`
-    );
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
     query = model.find(JSON.parse(queryStr));
 
@@ -48,14 +45,14 @@ const advancedResults = (model, populate) => async(req, res, next) => {
     if (endIndex < total) {
         pagination.next = {
             page: page + 1,
-            limit,
+            limit
         };
     }
 
     if (startIndex > 0) {
         pagination.prev = {
             page: page - 1,
-            limit,
+            limit
         };
     }
 
@@ -63,7 +60,7 @@ const advancedResults = (model, populate) => async(req, res, next) => {
         success: true,
         count: results.length,
         pagination,
-        data: results,
+        data: results
     };
     next();
 };
